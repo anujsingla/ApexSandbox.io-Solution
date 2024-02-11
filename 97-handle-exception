@@ -2,7 +2,7 @@ public String divide(Integer a, Integer b){
     //code here
     try {
         Integer result = a / b;
-        return (String)result;
+        return result.format();
     } catch(Exception e) {
         return e.getMessage();
     }
