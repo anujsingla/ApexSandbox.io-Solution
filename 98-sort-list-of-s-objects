@@ -8,7 +8,7 @@ public List<Account> getAccounts(List<Account> accounts) {
 
     accList.sort();
     for(Integer i=0; i<accounts.size(); i++) {
-        accounts[i] = accList[i].acc;
+        accounts[i] = accList[i].account;
     }
     
     return accounts;
