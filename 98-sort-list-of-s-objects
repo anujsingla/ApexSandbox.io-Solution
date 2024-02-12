@@ -1,6 +1,33 @@
 public List<Account> getAccounts(List<Account> accounts) {
     // code here
-    accounts.sort((a, b) => b.AnnualRevenue.compareTo(a.AnnualRevenue));
+    List<AccountWrapper> accList = new List<AccountWrapper>();
+
+    for(Account acc : accounts) {
+        accList.add(new AccountWrapper(acc));
+    }
+
+    accList.sort();
+    for(Integer i=0; i<accounts.size(); i++) {
+        accounts[i] = accList[i].acc;
+    }
+    
     return accounts;
 }
 // write extra class here 
+public class AccountWrapper implements Comparable {
+    public Account account; 
+
+    public AccountWrapper(Account acc) {
+        this.account = acc;
+    }
+
+    public Integer compareTo(Object compareTo) {
+        AccountWrapper aWrapper = (AccountWrapper) compareTo;
+
+        if (aWrapper.account.AnnualRevenue > this.account.AnnualRevenue) {
+            return 1;
+        }
+
+        return -1;
+    }
+}
