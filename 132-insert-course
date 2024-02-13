@@ -1,0 +1,28 @@
+public Id insertCourse(String name, String details, Integer credits) {
+    // code here
+    Schema.DescribeSObjectResult courseDescribe = apxio__Course__c.sObjectType.getDescribe();
+    Schema.DescribeFieldResult creditsFieldDescribe = courseDescribe.fields.getMap().get('apxio__Credits__c').getDescribe();
+    if (creditsFieldDescribe.getType() == Schema.DisplayType.Picklist) {
+        List<Schema.PicklistEntry> picklistValues = creditsFieldDescribe.getPicklistValues();
+        for (Schema.PicklistEntry picklistEntry : picklistValues) {
+            String label = picklistEntry.getLabel();
+            String value = picklistEntry.getValue();
+            
+            // Check if the picklist value is what you are looking for
+                if (value.equals(String.valueOf(credits))) {
+                    // Do something if the picklist value matches
+                    System.debug('Found the picklist value: ' + label);
+                    apxio__Course__c course = new apxio__Course__c();
+                    course.Name = name;
+                    course.apxio__Credits__c = String.valueOf(credits);
+                    course.apxio__Course_Details__c = details;
+                    insert course;
+                    Id courseId = course.Id;
+                    return courseId;
+                }
+        }
+    } else {
+        return null;
+    }
+    return null;
+}
