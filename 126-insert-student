@@ -1,0 +1,14 @@
+public Id insertStudent(String name, String email) {
+    // code here
+    apxio__Student__c ss = new apxio__Student__c();
+    ss.Name = name;
+    ss.apxio__Email__c = email;
+    try {
+      insert ss;
+      Id acctID = ss.Id;
+      return acctID;
+    } catch (DmlException e) {
+      // Process exception here
+      return '';
+    }
+}
