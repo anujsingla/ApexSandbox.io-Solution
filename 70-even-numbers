@@ -2,7 +2,7 @@ public List<Integer> evenNumbers(Integer n) {
     //code here
     List<Integer> even = new List<Integer>();
     Integer num = 2;
-    while (even.length() != n) {
+    while (even.size() != n) {
         even.add(num);
         num = num + 2;
     }
