@@ -1,0 +1,14 @@
+public Id classFromCourse(String courseName) {
+    // code here
+    List<apxio__Course__c> courseList = [SELECT Id, Name FROM apxio__Course__c WHERE Name = :courseName];
+    if (courseList.isEmpty()) {
+        return null;
+    }
+    apxio__Course__c ss = courseList[0];
+    apxio__Class__c cls = new apxio__Class__c();
+    cls.apxio__Course__c = ss.Id;
+    cls.Name = ss.Name;
+
+    insert cls;
+    return cls.Id;
+}
