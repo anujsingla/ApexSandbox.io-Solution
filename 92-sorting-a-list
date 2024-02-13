@@ -1,0 +1,8 @@
+public List<String> getNamesInAscOrder(List<String> accountNames)
+{
+    //code here
+    if (accountNames != null && !accountNames.isEmpty()) {
+        accountNames.sort();
+    }
+    return accountNames;
+}
