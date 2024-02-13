@@ -1,0 +1,21 @@
+public void enrollStudents(List<String> emails, String className) {
+    // code here
+    List<apxio__Class__c> classList = [SELECT Id, Name FROM apxio__Class__c WHERE Name = :className];
+    apxio__Class__c cls = classList[0];
+    // Query the students
+    Map<String, apxio__Student__c> emailToStudentMap = new Map<String, apxio__Student__c>();
+    for (apxio__Student__c student : [SELECT Id, apxio__Email__c, Name FROM apxio__Student__c WHERE apxio__Email__c IN :emails]) {
+        emailToStudentMap.put(student.apxio__Email__c, student);
+    }
+    List<apxio__Class_Enrollment__c> entrollmentList = new List<apxio__Class_Enrollment__c>();
+    for (String email: emails) {
+        if (emailToStudentMap.containsKey(email)) {
+            apxio__Student__c student = emailToStudentMap.get(email);
+            apxio__Class_Enrollment__c sEntrollment = new apxio__Class_Enrollment__c();
+            sEntrollment.apxio__Student__c = student.Id;
+            sEntrollment.apxio__Offered_Class__c = cls.Id;
+            entrollmentList.add(sEntrollment);
+        }
+    }
+    insert entrollmentList;
+}
