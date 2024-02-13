@@ -3,6 +3,6 @@ public void escalateIfMeetsCriteria(Case c) {
     if (c.Type == 'Mechanical' || c.Type == 'Electrical') {
         c.IsEscalated = (c.Reason == 'Breakdown' && c.Status == 'In Progress');
     } else {
-        return c.IsEscalated = false;
+         c.IsEscalated = false;
     }
 }
